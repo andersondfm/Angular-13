@@ -10,7 +10,7 @@ import { ProdutosService } from './produtos.service';
 export class ProdutosComponent implements OnInit {
 
 
-  public produtos = ['Teste'];
+  public produtos = ['Teste1, Teste2'];
 
   constructor(private produtosService: ProdutosService) {
 

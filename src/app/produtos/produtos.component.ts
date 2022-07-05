@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { Produto } from './models/Produtos';
+import { Observable } from 'rxjs';
 import { ProdutosService } from './produtos.service';
+
 
 @Component({
   selector: 'app-produtos',
   templateUrl: './produtos.component.html',
   styleUrls: ['./produtos.component.css']
 })
+
 export class ProdutosComponent implements OnInit {
 
+  getProdutoList$!:Observable<any[]>;
 
-  public produtos = ['Teste1, Teste2'];
+constructor(private service:ProdutosService){}
 
-  constructor(private produtosService: ProdutosService) {
-
-  }
-
-  ngOnInit() {
+  ngOnInit(): void {
+    this.getProdutoList$ = this.service.getProdutoList();
   }
 
 }

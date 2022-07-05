@@ -9,12 +9,14 @@ import { Produto } from './models/Produtos';
 })
 export class ProdutosService {
 
-  baseUrl = `${environment.UrlPrincipal}/api/produtos`;
+  constructor(private http: HttpClient){}
 
-constructor(private http: HttpClient) { }
+  getProdutoList():Observable<any[]>{
+    return this.http.get<any>(environment.UrlApi + 'api/produto')
+  }
 
-getAll(): Observable<Produto>{
-  return this.http.get<Produto>(this.baseUrl);
-}
+// getAll(): Observable<Produto>{
+//   return this.http.get<Produto>(this.baseUrl);
+// }
 
 }

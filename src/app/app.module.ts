@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
+import {ProdutosService} from './produtos/produtos.service';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ProdutosComponent} from './produtos/produtos.component';
@@ -41,6 +41,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -88,9 +89,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatTreeModule,
     OverlayModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [ProdutosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

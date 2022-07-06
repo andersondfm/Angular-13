@@ -16,8 +16,6 @@ import { Subject } from 'rxjs';
 })
 
 export class ProdutosComponent implements OnInit {
-  // Quando for array
-  // getProdutoList$!:Observable<any[]>;
 
   public displayedColumns: string[] = ['id','nome','dataInclusao','usuarioInclusao'];
   public produtos!: MatTableDataSource<Produto>;
@@ -39,9 +37,7 @@ constructor(private service:ProdutosService,private http: HttpClient){}
 
   ngOnInit(): void {
     this.loadData();
-    // this.produtos = this.service.getProdutoList();
   }
-  // debounce filter text changes
   onFilterTextChanged(filterText: string) {
     if (this.filterTextChanged.observers.length === 0) {
       this.filterTextChanged

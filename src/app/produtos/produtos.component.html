@@ -4,25 +4,6 @@
  Adicionar Produto
 </button>
 
-<!-- <table>
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Nome</th>
-      <th>Data Inclusão</th>
-      <th>Usuário</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of getProdutoList$">
-      <td>{{item.id}}</td>
-      <td>{{item.nome}}</td>
-      <td>{{item.dataInclusao}}</td>
-      <td>{{item.usuarioInclusao}}</td>
-    </tr>
-  </tbody>
-</table> -->
-
 <table mat-table [dataSource]="produtos" class="mat-elevation-z8"
   [hidden]="!produtos"
   matSort (matSortChange)="loadData()"

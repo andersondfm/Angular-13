@@ -1,8 +1,18 @@
 <br>
+
+<p *ngIf="!produtos"><em>Loading...</em></p>
+
 <button mat-flat-button color="primary"
   class="btn-add" [routerLink]="['/addprodutcs']">
  Adicionar Produto
 </button>
+
+<br>
+
+<mat-form-field [hidden]="!produtos">
+  <input matInput #filter (keyup)="onFilterTextChanged(filter.value)"
+         placeholder="Pesquisar">
+</mat-form-field>
 
 <table mat-table [dataSource]="produtos" class="mat-elevation-z8"
   [hidden]="!produtos"

@@ -11,12 +11,13 @@ export class ProdutosService {
 
   constructor(private http: HttpClient){}
 
-  getProdutoList():Observable<any[]>{
-    return this.http.get<any>(environment.UrlApi + 'api/produto')
-  }
+  //Metodo 1
+  // getProdutoList():Observable<any[]>{
+  //   return this.http.get<any>(environment.UrlApi + 'api/produto')
+  // }
 
-// getAll(): Observable<Produto>{
-//   return this.http.get<Produto>(this.baseUrl);
-// }
+  getProdutoList(): Observable<Produto>{
+  return this.http.get<Produto>(environment.UrlApi + 'api/produto');
+}
 
 }

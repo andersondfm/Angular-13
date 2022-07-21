@@ -4,9 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { environment } from './../../environments/environment';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -33,11 +31,12 @@ export class ProdutosComponent implements OnInit {
 
   filterTextChanged: Subject<string> = new Subject<string>();
 
-constructor(private service:ProdutosService,private http: HttpClient){}
+constructor(private produtosService:ProdutosService){}
 
   ngOnInit(): void {
     this.loadData();
   }
+
   onFilterTextChanged(filterText: string) {
     if (this.filterTextChanged.observers.length === 0) {
       this.filterTextChanged
@@ -58,31 +57,37 @@ constructor(private service:ProdutosService,private http: HttpClient){}
   }
 
   getData(event: PageEvent) {
-    var url = environment.UrlApi + 'api/Produto';
-    var params = new HttpParams()
-      .set("pageIndex", event.pageIndex.toString())
-      .set("pageSize", event.pageSize.toString())
-      .set("sortColumn", (this.sort)
-        ? this.sort.active
-        : this.defaultSortColumn)
-      .set("sortOrder", (this.sort)
-        ? this.sort.direction
-        : this.defaultSortOrder);
+    var sortColumn = (this.sort)
+      ? this.sort.active
+      : this.defaultSortColumn;
 
-    if (this.filterQuery) {
-      params = params
-        .set("filterColumn", this.defaultFilterColumn)
-        .set("filterQuery", this.filterQuery);
-    }
+    var sortOrder = (this.sort)
+      ? this.sort.direction
+      : this.defaultSortOrder;
 
-    this.http.get<any>(url, { params })
+    var filterColumn = (this.filterQuery)
+      ? this.defaultFilterColumn
+      : null;
+
+    var filterQuery = (this.filterQuery)
+      ? this.filterQuery
+      : null;
+
+    this.produtosService.getData(
+      event.pageIndex,
+      event.pageSize,
+      sortColumn,
+      sortOrder,
+      filterColumn,
+      filterQuery)
+
       .subscribe(result => {
         console.log(result);
         this.paginator.length = result.totalCount;
         this.paginator.pageIndex = result.pageIndex;
         this.paginator.pageSize = result.pageSize;
-        this.produtos = new MatTableDataSource<Produto>(result.dados);
-      },error => console.error(error));
+        this.produtos = new MatTableDataSource<Produto>(result.data);
+      }, error => console.error(error));
   }
 
 }

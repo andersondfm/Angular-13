@@ -20,7 +20,7 @@ export abstract class BaseService<T> {
   abstract post(item: T): Observable<T>;
 
   protected getUrl(url: string) {
-    return environment.baseUrl + url;
+    return environment.UrlApi + url;
   }
 }
 

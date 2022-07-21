@@ -1,6 +1,6 @@
 <br>
 
-<p *ngIf="!produtos"><em>Loading...</em></p>
+<p *ngIf="!produtos"><em>Carregando...</em></p>
 
 <button mat-flat-button color="primary"
   class="btn-add" [routerLink]="['/addprodutcs']">
@@ -33,7 +33,7 @@
   <ng-container matColumnDef="nome">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Nome</th>
     <td mat-cell *matCellDef="let produto">
-      <a [routerLink]="['/city', produto.id]">{{produto.nome}}</a>
+      <a [routerLink]="['/produto', produto.id]">{{produto.nome}}</a>
     </td>
   </ng-container>
 
